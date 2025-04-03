@@ -3,7 +3,7 @@ import { AppError } from "../errors/appError";
 import { TaskDataCreate, UserTaskPagination } from "../services/taskServices";
 
 export type CreateTaskDataType = TaskDataCreate & { id: string };
-export type UpdateTaskDataType = CreateTaskDataType & { update_at: Date };
+export type UpdateTaskDataType = CreateTaskDataType & { updated_at: Date };
 
 export const taskRepository = {
   async createTask({
@@ -116,20 +116,20 @@ export const taskRepository = {
     date,
     status,
     user_id,
-    update_at,
+    updated_at,
   }: UpdateTaskDataType) {
     try {
       const db = await sqliteConnection();
 
       const query = `
       UPDATE tasks
-      SET title = ?, description = ?, date = ?, status = ?, update_at = ?
+      SET title = ?, description = ?, date = ?, status = ?, updated_at = ?
       WHERE id = ? AND user_id = ?
     `;
 
-      await db.run(query, [title, description, date, status, update_at, id, user_id]);
+      await db.run(query, [title, description, date, status, updated_at, id, user_id]);
 
-      return { id, title, description, date, status, user_id, update_at };
+      return { id, title, description, date, status, user_id, updated_at };
     } catch (error) {
       throw error;
     }

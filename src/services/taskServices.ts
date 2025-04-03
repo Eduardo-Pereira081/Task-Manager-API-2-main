@@ -81,7 +81,7 @@ export const taskServices = {
         date,
         status: status || "pending",
         user_id,
-        update_at: new Date(),
+        updated_at: new Date(),
       });
 
       return taskUpdated;
